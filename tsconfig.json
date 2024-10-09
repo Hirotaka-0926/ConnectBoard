@@ -1,4 +1,11 @@
 {
+  "compilerOptions": {
+    "types": ["vite-plugin-pages"],
+    "baseUrl": ".",
+    "paths": {
+      "~react-pages": ["./node_modules/vite-plugin-pages/client"]
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

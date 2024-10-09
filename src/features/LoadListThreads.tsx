@@ -1,22 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { Thread } from "../types/threads";
+import { getList } from "../utils/railwayFunc";
 
-interface Thread {
-  id: string;
-  title: string;
-}
-
-const LoadListThreads = () => {
-  const [threadsLists, setThreadsLists] = useState<Thread[]>([]);
-
+const LoadListThreads = ({ threadsLists, setThreadsLists }) => {
   const fetchThreads = async () => {
     try {
-      const response = await fetch(
-        "https://railway.bulletinboard.techtrain.dev/threads"
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      console.log(response);
+      const response = await getList();
       const jsonData: Thread[] = await response.json();
 
       setThreadsLists(jsonData);
