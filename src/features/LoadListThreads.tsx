@@ -1,17 +1,23 @@
 import { useEffect } from "react";
 import { Thread } from "../types/threads";
-import { getList } from "../utils/railwayFunc";
+import { getThreads } from "../utils/railwayFunc";
+import { useNavigate } from "react-router-dom";
 
 const LoadListThreads = ({ threadsLists, setThreadsLists }) => {
+  const navigate = useNavigate();
   const fetchThreads = async () => {
     try {
-      const response = await getList();
+      const response = await getThreads();
       const jsonData: Thread[] = await response.json();
 
       setThreadsLists(jsonData);
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const loadThread = (id: number) => {
+    navigate(`/threads/${id}`);
   };
 
   useEffect(() => {
@@ -21,8 +27,10 @@ const LoadListThreads = ({ threadsLists, setThreadsLists }) => {
   return (
     <div>
       <ul>
-        {threadsLists.map((thread) => (
-          <li key={thread.id}>{thread.title}</li>
+        {threadsLists.map((thread: Thread) => (
+          <li key={thread.id} onClick={() => loadThread(thread.id)}>
+            {thread.title}
+          </li>
         ))}
       </ul>
     </div>

@@ -1,4 +1,3 @@
-import LoadListThreads from "./LoadListThreads";
 import { useRoutes } from "react-router-dom";
 import routes from "~react-pages";
 
