@@ -27,7 +27,7 @@ export const postNewThread = async (title: string) => {
   }
 };
 
-export const fetchPosting = async (id: number) => {
+export const fetchPosting = async (id: string) => {
   const response = await fetch(
     `https://railway.bulletinboard.techtrain.dev/threads/${id}/posts`
   );

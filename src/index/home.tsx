@@ -1,16 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Thread } from "../types/threads";
-import LoadListThreads from "../features/LoadListThreads";
+import { getThreads } from "../utils/railwayFunc";
+import { Link } from "react-router-dom";
 
-export const HomePage = () => {
+const HomePage = () => {
   const [threadsLists, setThreadsLists] = useState<Thread[]>([]);
 
+  const fetchThreads = async () => {
+    try {
+      const response = await getThreads();
+      const jsonData: Thread[] = await response.json();
+
+      setThreadsLists(jsonData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchThreads();
+  }, []);
+
   return (
-    <>
-      <LoadListThreads
-        threadsLists={threadsLists}
-        setThreadsLists={setThreadsLists}
-      />
-    </>
+    <div>
+      <ul>
+        {threadsLists.map((thread: Thread) => (
+          <li key={thread.id}>
+            <Link to={`/threads/${thread.id}`}>{thread.title}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
+
+export default HomePage;

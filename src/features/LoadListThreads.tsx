@@ -3,7 +3,9 @@ import { Thread } from "../types/threads";
 import { getThreads } from "../utils/railwayFunc";
 import { useNavigate } from "react-router-dom";
 
-const LoadListThreads = ({ threadsLists, setThreadsLists }) => {
+const LoadListThreads = () => {
+  const [threadsLists, setThreadsLists] = useState<Thread[]>([]);
+
   const navigate = useNavigate();
   const fetchThreads = async () => {
     try {
