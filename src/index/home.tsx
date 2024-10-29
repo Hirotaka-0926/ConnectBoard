@@ -26,7 +26,9 @@ const HomePage = () => {
       <ul>
         {threadsLists.map((thread: Thread) => (
           <li key={thread.id}>
-            <Link to={`/threads/${thread.id}`}>{thread.title}</Link>
+            <Link to={`/threads/${thread.id}`} state={{ title: "test" }}>
+              {thread.title}
+            </Link>
           </li>
         ))}
       </ul>

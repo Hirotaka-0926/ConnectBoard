@@ -4,7 +4,7 @@ import { postNewThread } from "../utils/railwayFunc";
 export const CreateNewThread = () => {
   const [title, setTitle] = useState<string>("");
 
-  const inputText = (e) => {
+  const inputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 

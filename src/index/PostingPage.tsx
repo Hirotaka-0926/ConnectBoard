@@ -2,7 +2,12 @@ import { useEffect, useState, startTransition } from "react";
 import { fetchPosting } from "../utils/railwayFunc";
 import { Posts } from "../types/threads";
 
-export const PostingPage = ({ thread_id }: { thread_id: string }) => {
+interface Props {
+  thread_id: string;
+  postUpdated: boolean;
+}
+
+export const PostingPage: React.FC<Props> = ({ thread_id, postUpdated }) => {
   const [post, setPost] = useState<Posts | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -27,7 +32,7 @@ export const PostingPage = ({ thread_id }: { thread_id: string }) => {
     startTransition(() => {
       getPosting();
     });
-  }, []);
+  }, [postUpdated]);
 
   return (
     <div>

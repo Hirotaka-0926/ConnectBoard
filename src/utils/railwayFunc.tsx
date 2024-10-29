@@ -37,3 +37,28 @@ export const fetchPosting = async (id: string) => {
 
   return response;
 };
+
+export const putPosting = async (id: string, newPost: string) => {
+  try {
+    console.log("id : " + id + " , post : " + newPost);
+
+    const option = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        post: newPost,
+      }),
+    };
+
+    const response = await fetch(
+      `https://railway.bulletinboard.techtrain.dev/threads/${id}/posts`,
+      option
+    );
+
+    console.log(response);
+  } catch (e) {
+    console.error(e);
+  }
+};
